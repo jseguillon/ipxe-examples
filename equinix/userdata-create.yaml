@@ -1,10 +1,10 @@
 #cloud-config
 scheme_version: 1
-token: token           # replace with a desired token
+token: <token for joiningcluster>
 os:
   ssh_authorized_keys:
-  - ssh-rsa ...        # replace with your public key
-  password: p@ssword   # replace with a your password
+  - <ssh keys for rancher user>
+  password: <password for console mode>
   ntp_servers:
   - 0.suse.pool.ntp.org
   - 1.suse.pool.ntp.org
@@ -13,6 +13,10 @@ install:
   device: /dev/sda
   iso_url: https://releases.rancher.com/harvester/v1.3.0/harvester-v1.3.0-amd64.iso
   tty: ttyS1,115200n8
-  vip: <server_public_ip> # use Elastic IPs or reinstall when the Public IP is known
+  vip: <one of your elastic ip, can deploy if not exists but something must be set>
   vip_mode: static
-  mgmt_interface: eth0
+  # ok for dublin m3.small.x86
+  management_interface:
+    interfaces:
+    - name: enp1s0f0
+    method: dhcp
